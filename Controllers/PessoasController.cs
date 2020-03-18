@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Comeia.Data;
 using Comeia.Models;
+using Microsoft.AspNetCore.Authorization;
+using Comeia.ActionFilters;
 
 namespace Comeia.Controllers
 {
@@ -20,12 +22,14 @@ namespace Comeia.Controllers
         }
 
         // GET: Pessoas
+        [CheckSession]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Pessoa.ToListAsync());
         }
 
         // GET: Pessoas/Details/5
+        [CheckSession]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +48,7 @@ namespace Comeia.Controllers
         }
 
         // GET: Pessoas/Create
+        [CheckSession]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +59,7 @@ namespace Comeia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckSession]
         public async Task<IActionResult> Create([Bind("Id,Full_name,Birth_date,Gender")] Pessoa pessoa)
         {
             if (ModelState.IsValid)
@@ -66,6 +72,7 @@ namespace Comeia.Controllers
         }
 
         // GET: Pessoas/Edit/5
+        [CheckSession]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +93,7 @@ namespace Comeia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckSession]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Full_name,Birth_date,Gender")] Pessoa pessoa)
         {
             if (id != pessoa.Id)
@@ -117,6 +125,7 @@ namespace Comeia.Controllers
         }
 
         // GET: Pessoas/Delete/5
+        [CheckSession]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +146,7 @@ namespace Comeia.Controllers
         // POST: Pessoas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [CheckSession]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var pessoa = await _context.Pessoa.FindAsync(id);
