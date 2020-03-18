@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Comeia.Models.Pessoa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Cadastrar</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Full_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birth_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Full_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birth_date)
+            </td>
+            <td>
+                @{ 
+                    string gender = "";
+                    if (item.Gender == 0)
+                    {
+                        gender = "Não Declarado";
+                    }else if (item.Gender ==1)
+                    {
+                        gender = "Masculino";
+                    }else if (item.Gender == 2)
+                    {
+                        gender = "Feminino";
+                    }
+                    else
+                    {
+                        gender = "Prefiro não declarar";
+                    }
+                }
+                @Html.DisplayFor(modelItem => gender)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

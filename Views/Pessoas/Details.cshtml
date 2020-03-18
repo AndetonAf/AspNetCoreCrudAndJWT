@@ -1,0 +1,53 @@
+﻿@model Comeia.Models.Pessoa
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Pessoa</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Full_name)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Full_name)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Birth_date)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Birth_date)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class="col-sm-8">
+            @{
+                string gender = "";
+                if (Model.Gender == 0)
+                {
+                    gender = "Não Declarado";
+                }else if (Model.Gender ==1)
+                {
+                    gender = "Masculino";
+                }else if (Model.Gender == 2)
+                {
+                    gender = "Feminino";
+                }
+                else
+                {
+                    gender = "Prefiro não declarar";
+                }
+            }
+            @Html.DisplayFor(model => gender)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Voltar a lista</a>
+</div>
