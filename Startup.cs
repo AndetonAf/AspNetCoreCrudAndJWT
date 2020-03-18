@@ -37,7 +37,7 @@ namespace Comeia
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ComeiaContext>(options => options.UseSqlServer("server=localhost;database=comeia;uid=sa;password=root"));
+            services.AddDbContext<ComeiaContext>(options => options.UseSqlServer("server=localhost;database=master;uid=sa;password=DockerSql2017!"));
             services.AddScoped<JwtSecurityTokenHandler>();
 
             var key = Encoding.UTF8.GetBytes("XMat14FJM6hi6TXoy98CyZ0dc2Cx0JQi");
